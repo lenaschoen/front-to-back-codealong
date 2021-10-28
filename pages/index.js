@@ -23,6 +23,18 @@ export default function Home() {
           filterSetter={setGenreFilter} // setGenreFilter from useState()
           name="genre"
         />
+        <FilterInput
+          options={artistList} // artistList from assets directory
+          value={artistFilter} // artistFilter from useState()
+          filterSetter={setArtistFilter} // setArtistFilter from useState()
+          name="artist"
+        />
+        <FilterInput
+          options={albumList} // albumList from assets directory
+          value={albumFilter} // albumFilter from useState()
+          filterSetter={setAlbumFilter} // setAlbumFilter from useState()
+          name="album"
+        />
       </section>
       <div className="song-list">
         <div className="song-header">
@@ -37,12 +49,20 @@ export default function Home() {
           .filter((song) => {
             let isVisible = true; // by default all songs are visible
 
-            // if there is a genre selected and this dont match to the genre of this song hide the song
+            // if there is a genre selected and this don't match to the genre of this song hide the song
             if (genreFilter && genreFilter !== song.genre) {
               isVisible = false;
             }
+            // if there is a artist selected and this don't match to the artist of this song hide the song
+            if (artistFilter && artistFilter !== song.artist) {
+              isVisible = false;
+            }
+            // if there is a album selected and this don't match to the album of this song hide the song
+            if (albumFilter && albumFilter !== song.album) {
+              isVisible = false;
+            }
 
-            // Apply the same pattern for artists and albums
+            // Apply the same pattern for artist and album
 
             return isVisible;
           })
